@@ -26,12 +26,17 @@ export default function Home() {
         v4 = ast.program.body[13].expression;
         v6 = ast.program.body[14].expression;
 
+        let flow0, flow1, flow3;
+        flow0 = parseInt(flow.right.value) % 1024;
+        flow1 = parseInt(flow.right.value) - flow0;
+        flow0 = flow0 * 1000;
+        flow0 = flow0 - flow0 % 1024;
+
         time.left.name == 'time' ? setOnlineTime(time.right.value) : '-1';
-        flow.left.name == 'flow' ? setRemain(flow.right.value) : '-1';
+        flow.left.name == 'flow' ? setRemain(flow1 + flow0/1024) : '-1';
         snum.left.name == 'uid' ? setStudentNumber(snum.right.value) : '-1';
         v4.left.name == 'v4ip' ? setIpv4(v4.right.value) : '-1';
         v6.left.name == 'v6ip' ? setIpv6(v6.right.value) : '-1';
-        console.log(remain)
 
         setTimeout(() => {
           setCount(count + 1);
@@ -45,7 +50,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <h1>在线时间：{parseInt(onlineTime / 60 / 24)} 天 {parseInt(onlineTime / 60 % 24)} 小时 {onlineTime % 60} 分钟</h1>
-      <h1>已用流量：{parseInt(remain / 1024 / 1024)} GB {parseInt(remain / 1024 % 1024)} MB {remain % 1024}KB</h1>
+      <h1>已用流量：{parseInt(remain / 1024 / 1024)} GByte {parseInt(remain / 1024 % 1024)} MByte {remain % 1024} KByte</h1>
       <h1>学号：{studentNumber}</h1>
       <h1>IPv4 地址：{ipv4}</h1>
       <h1>IPv6 地址：{ipv6}</h1>
